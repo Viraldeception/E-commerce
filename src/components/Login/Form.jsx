@@ -1,36 +1,35 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import axios from "axios";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
+  const [isErrorLogin, setIsErrorLogin] = useState(false);
 
-  const [isErrorLogin, setIsErrorLogin] = useState(false)
+  const { handleSubmit, reset, register } = useForm();
 
-  const {handleSubmit, reset, register} = useForm()
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-  const submit = data => {
-    const URL = 'https://ecommerce-api-react.herokuapp.com/api/v1/users/login'
-    axios.post(URL, data)
-      .then(res => {
-        localStorage.setItem('token', res.data.data.token)
-        navigate('/')
+  const submit = (data) => {
+    const URL = "https://ecommerce-api-react.herokuapp.com/api/v1/users/login";
+    axios
+      .post(URL, data)
+      .then((res) => {
+        localStorage.setItem("token", res.data.data.token);
+        navigate("/");
       })
-      .catch(err => {
-        localStorage.removeItem('token')
-        setIsErrorLogin(true)
+      .catch((err) => {
+        localStorage.removeItem("token");
+        setIsErrorLogin(true);
         setTimeout(() => {
-          setIsErrorLogin(false)
-        }, 5000)
-      })
+          setIsErrorLogin(false);
+        }, 5000);
+      });
     reset({
-      email: '',
-      password: ''
-    })
-    
-  }
+      email: "",
+      password: "",
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit(submit)} className="login__form">
@@ -39,38 +38,38 @@ const Form = () => {
           <b className="login-b">Email: </b>ruben@gmail.com
         </li>
         <li className="flex-login">
-          <b className="login-b">Password:    </b>ruben1234
+          <b className="login-b">Password: </b>ruben1234
         </li>
       </ul>
       <h2 className="login__title">Enter your information</h2>
       <ul className="login__list">
         <li className="login__item">
-          <label htmlFor="login-email" className="login__label">Email</label>
-          <input 
+          <label htmlFor="login-email" className="login__label">
+            Email
+          </label>
+          <input
             type="email"
-            className="login__input" 
+            className="login__input"
             id="login-email"
-            {...register('email')}
+            {...register("email")}
           />
         </li>
         <li className="login__item">
-          <label htmlFor="login-pass" className="login__label">Password</label>
-          <input 
-            type="password" 
-            className="login__input" 
+          <label htmlFor="login-pass" className="login__label">
+            Password
+          </label>
+          <input
+            type="password"
+            className="login__input"
             id="login-pass"
-            {...register('password')}
+            {...register("password")}
           />
         </li>
       </ul>
-      <div>
-        {
-          isErrorLogin && 'Invalid credentials, try again...'
-        }
-      </div>
-      <button>Login</button>
+      <div>{isErrorLogin && "Invalid credentials, try again..."}</div>
+      <button class="btn-login">Login</button>
     </form>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;

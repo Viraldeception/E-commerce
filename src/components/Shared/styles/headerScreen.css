@@ -7,9 +7,13 @@
   z-index: 2;
 }
 .header__title {
-  color: var(--secondary-color);
+  background: linear-gradient(90deg, #0d7aee, #08025d);
+  font-size: 40px;
+  text-transform: uppercase;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.header__menuham{
+.header__menuham {
   font-size: 1.4rem;
   position: fixed;
   top: 30px;
@@ -17,7 +21,7 @@
   z-index: 2;
   cursor: pointer;
 }
-.navbar{
+.navbar {
   width: min(100%, 300px);
   position: fixed;
   background-color: var(--primary-color);
@@ -91,7 +95,7 @@
     display: flex;
     align-items: center;
   }
-  .navbar__links{
+  .navbar__links {
     padding: 0 30px;
   }
 }

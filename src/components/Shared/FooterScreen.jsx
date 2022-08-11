@@ -3,7 +3,6 @@ import "./styles/footerScreen.css";
 const FooterScreen = () => {
   return (
     <footer className="footer">
-      {/* <p className="footer__text">&copy;</p> */}
       <ul className="redes">
         <li className="redes__items">
           <a href="#" className="redes__links">
